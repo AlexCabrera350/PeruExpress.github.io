@@ -1,0 +1,119 @@
+/* Estilos personalizados para PeruExpress */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Suavizado de desplazamiento */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Personalización de la barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Scrollbar en modo oscuro */
+.dark ::-webkit-scrollbar-track {
+  background: #090d16;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #1e293b;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Animación de entrada para modales */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal {
+  animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Asientos de bus con interactividad */
+.bus-seat {
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.bus-seat:hover:not(.seat-occupied) {
+  transform: translateY(-2px);
+}
+
+/* Asiento disponible (Modo Claro) */
+.seat-available {
+  background-color: #ffffff;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+.seat-available:hover {
+  border-color: #0284c7;
+  background-color: #f0f9ff;
+  color: #0284c7;
+}
+
+/* Asiento disponible (Modo Oscuro) */
+.dark .seat-available {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+.dark .seat-available:hover {
+  border-color: #38bdf8;
+  background-color: #0c4a6e;
+  color: #38bdf8;
+}
+
+/* Asiento seleccionado */
+.seat-selected {
+  background-color: #0284c7 !important;
+  border-color: #0369a1 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.3);
+}
+
+/* Asiento ocupado (Modo Claro) */
+.seat-occupied {
+  background-color: #e2e8f0;
+  border-color: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+/* Asiento ocupado (Modo Oscuro) */
+.dark .seat-occupied {
+  background-color: #0f172a;
+  border-color: #1e293b;
+  color: #475569;
+  cursor: not-allowed;
+  opacity: 0.55;
+}
