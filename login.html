@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso y Registro de Usuarios | PeruExpress</title>
+
+  <!-- Tailwind CSS CDN con modo oscuro por clase -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#0f2759',
+              950: '#0a1936',
+            },
+            accent: {
+              400: '#fb923c',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Estilos complementarios -->
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col justify-between antialiased transition-colors duration-200">
+
+  <!-- ================= ENCABEZADO SIMPLIFICADO ================= -->
+  <header class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center gap-2.5 group">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-brand-950 via-brand-800 to-accent-600 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
+          <i data-lucide="bus" class="w-5 h-5"></i>
+        </div>
+        <div class="text-xl font-black tracking-tight text-brand-950 dark:text-white leading-none">
+          PERU<span class="text-accent-600">EXPRESS</span>
+        </div>
+      </a>
+
+      <!-- Acciones: Volver y Switch de Tema -->
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-brand-700 dark:hover:text-accent-400 transition">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Volver al Inicio</span>
+        </a>
+
+        <div class="h-5 w-px bg-slate-200 dark:bg-slate-700"></div>
+
+        <!-- Switch de Modo Oscuro al extremo derecho -->
+        <button id="theme-toggle" type="button" aria-label="Cambiar tema" 
+                class="relative inline-flex items-center h-7 w-12 rounded-full bg-slate-200 dark:bg-slate-700 p-0.5 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-500 hover:opacity-90">
+          <span class="sr-only">Alternar modo oscuro</span>
+          <span class="w-6 h-6 rounded-full bg-white dark:bg-slate-900 shadow-sm flex items-center justify-center transform transition-transform duration-200 translate-x-0 dark:translate-x-5">
+            <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-500 block dark:hidden"></i>
+            <i data-lucide="moon" class="w-3.5 h-3.5 text-sky-400 hidden dark:block"></i>
+          </span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= CONTENEDOR PRINCIPAL ================= -->
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full flex items-center justify-center">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-800 overflow-hidden w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 transition-colors duration-200">
+      
+      <!-- Panel Lateral: Beneficios Corporativos (Visible en LG) -->
+      <div class="lg:col-span-5 bg-gradient-to-br from-brand-950 via-brand-900 to-slate-900 p-8 sm:p-10 text-white flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-accent-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-white/10 text-accent-400 border border-white/10 mb-6">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Club Viajero PeruExpress
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight leading-tight">
+            Gestiona tus boletos y viaja con total comodidad
+          </h2>
+          <p class="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Inicia sesión o regístrate en segundos para disfrutar de todos los beneficios exclusivos de nuestra plataforma interprovincial.
+          </p>
+
+          <div class="mt-8 space-y-4 text-xs text-slate-200">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-accent-400">
+                <i data-lucide="zap" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <strong class="text-white block font-bold">Compra Rápida en 1 Clic</strong>
+                <span>Guarda tus datos de pasajero y método de pago preferido.</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-accent-400">
+                <i data-lucide="repeat" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <strong class="text-white block font-bold">Reprogramaciones Online</strong>
+                <span>Modifica fechas de viaje sin necesidad de hacer colas en terminales.</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-accent-400">
+                <i data-lucide="receipt" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <strong class="text-white block font-bold">Facturación Automática</strong>
+                <span>Descarga boletos electrónicos y facturas válidas ante SUNAT.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-white/10 text-[11px] text-slate-400 flex items-center justify-between">
+          <span>Soporte al cliente 24/7</span>
+          <strong class="text-white">(01) 500-8800</strong>
+        </div>
+      </div>
+
+      <!-- Panel de Formulario: Tabs Iniciar Sesión / Registro -->
+      <div class="lg:col-span-7 p-6 sm:p-10">
+        
+        <!-- Pestañas de Alternancia -->
+        <div class="flex border-b border-slate-200 dark:border-slate-800 mb-8">
+          <button id="tab-login" type="button" class="flex-1 pb-4 text-center font-bold text-sm border-b-2 border-brand-900 dark:border-accent-500 text-brand-950 dark:text-white transition flex items-center justify-center gap-2">
+            <i data-lucide="log-in" class="w-4 h-4"></i>
+            Iniciar Sesión
+          </button>
+          <button id="tab-register" type="button" class="flex-1 pb-4 text-center font-bold text-sm border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition flex items-center justify-center gap-2">
+            <i data-lucide="user-plus" class="w-4 h-4"></i>
+            Crear Cuenta Nueva
+          </button>
+        </div>
+
+        <!-- ================= FORMULARIO: INICIAR SESIÓN ================= -->
+        <form id="form-login" class="space-y-4">
+          <div>
+            <label for="login-identifier" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+              Correo Electrónico o N° de DNI
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i data-lucide="user" class="w-4 h-4"></i>
+              </span>
+              <input type="text" id="login-identifier" required placeholder="ejemplo@correo.com o 72481920" 
+                     class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-4 py-3 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 dark:focus:ring-accent-500 focus:outline-none transition">
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <label for="login-password" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                Contraseña
+              </label>
+              <a href="#" id="link-forgot-pass" class="text-xs font-semibold text-brand-700 dark:text-accent-400 hover:underline">
+                ¿Olvidaste tu contraseña?
+              </a>
+            </div>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i data-lucide="lock" class="w-4 h-4"></i>
+              </span>
+              <input type="password" id="login-password" required placeholder="••••••••" 
+                     class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-10 pr-10 py-3 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 dark:focus:ring-accent-500 focus:outline-none transition">
+              <button type="button" class="btn-toggle-password absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                <i data-lucide="eye" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-1">
+            <label class="flex items-center gap-2 cursor-pointer text-xs font-medium text-slate-600 dark:text-slate-400">
+              <input type="checkbox" class="rounded border-slate-300 text-brand-900 focus:ring-brand-700 w-4 h-4">
+              <span>Recordar mi sesión en este dispositivo</span>
+            </label>
+          </div>
+
+          <button type="submit" class="w-full mt-2 py-3.5 px-4 bg-brand-900 hover:bg-brand-800 dark:bg-accent-600 dark:hover:bg-accent-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+            <i data-lucide="log-in" class="w-4 h-4"></i>
+            Ingresar a mi Cuenta
+          </button>
+
+          <!-- Separador Social -->
+          <div class="relative my-6 text-center">
+            <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-200 dark:border-slate-800"></div></div>
+            <span class="relative bg-white dark:bg-slate-900 px-3 text-[11px] uppercase tracking-wider text-slate-400 font-semibold">O ingresa con</span>
+          </div>
+
+          <button type="button" id="btn-google-login" class="w-full py-2.5 px-4 border border-slate-300 dark:border-slate-700 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            Continuar con Google
+          </button>
+        </form>
+
+        <!-- ================= FORMULARIO: REGISTRO NUEVO ================= -->
+        <form id="form-register" class="space-y-4 hidden">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="reg-nombres" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                Nombres Completos
+              </label>
+              <input type="text" id="reg-nombres" required placeholder="Ej. Carlos Eduardo" 
+                     class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 dark:focus:ring-accent-500 focus:outline-none transition">
+            </div>
+
+            <div>
+              <label for="reg-apellidos" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                Apellidos
+              </label>
+              <input type="text" id="reg-apellidos" required placeholder="Ej. Quispe Torres" 
+                     class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 dark:focus:ring-accent-500 focus:outline-none transition">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label for="reg-doc-tipo" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                Tipo Doc.
+              </label>
+              <select id="reg-doc-tipo" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none transition">
+                <option value="DNI">DNI</option>
+                <option value="CE">C. Extranjería</option>
+                <option value="PAS">Pasaporte</option>
+              </select>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label for="reg-doc-num" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                Número de Documento
+              </label>
+              <input type="text" id="reg-doc-num" required maxlength="12" placeholder="8 dígitos para DNI" 
+                     class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none transition">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="reg-email" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                Correo Electrónico
+              </label>
+              <input type="email" id="reg-email" required placeholder="tu@correo.com" 
+                     class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none transition">
+            </div>
+
+            <div>
+              <label for="reg-phone" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                Celular / WhatsApp
+              </label>
+              <input type="tel" id="reg-phone" required placeholder="987 654 321" 
+                     class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none transition">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="reg-password" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                Crear Contraseña
+              </label>
+              <input type="password" id="reg-password" required placeholder="Mínimo 8 caracteres" 
+                     class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none transition">
+            </div>
+
+            <div>
+              <label for="reg-password-confirm" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                Confirmar Contraseña
+              </label>
+              <input type="password" id="reg-password-confirm" required placeholder="Repite la contraseña" 
+                     class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none transition">
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <label class="flex items-start gap-2 cursor-pointer text-xs text-slate-600 dark:text-slate-400">
+              <input type="checkbox" required class="rounded border-slate-300 text-brand-900 focus:ring-brand-700 w-4 h-4 mt-0.5">
+              <span>Acepto las <a href="#" class="text-brand-700 dark:text-accent-400 font-semibold underline">Condiciones del Servicio</a> y las Políticas de Protección de Datos Personales de PeruExpress.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="w-full mt-2 py-3.5 px-4 bg-accent-600 hover:bg-accent-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+            <i data-lucide="user-check" class="w-4 h-4"></i>
+            Crear mi Cuenta Gratis
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= MODAL DE SIMULACIÓN DE ÉXITO ================= -->
+  <div id="auth-success-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 max-w-md w-full p-8 text-center animate-modal">
+      <div class="w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto mb-5">
+        <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+      </div>
+      <h3 id="modal-success-title" class="text-2xl font-black text-slate-900 dark:text-white">
+        ¡Bienvenido a PeruExpress!
+      </h3>
+      <p id="modal-success-message" class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2.5 leading-relaxed">
+        Has iniciado sesión correctamente. Ya puedes acceder a la compra de pasajes con tus datos guardados.
+      </p>
+      <div class="mt-6 flex flex-col gap-2.5">
+        <a href="index.html" class="w-full py-3 px-4 bg-brand-900 hover:bg-brand-800 dark:bg-accent-600 dark:hover:bg-accent-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-sm">
+          Ir al Buscador de Pasajes
+        </a>
+        <button id="btn-close-success-modal" type="button" class="w-full py-2.5 px-4 text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+          Permanecer en esta página
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PIE DE PÁGINA SIMPLIFICADO ================= -->
+  <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors duration-200">
+    <div class="max-w-7xl mx-auto px-4">
+      <p>© 2026 PeruExpress S.A.C. - Sistema Seguro de Autenticación de Pasajeros.</p>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ESPECÍFICO DE LOGIN/REGISTRO ================= -->
+  <script>
+    // Sincronización de tema inicial
+    (function() {
+      const savedTheme = localStorage.getItem('peruexpress-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+
+      // Switch de Modo Oscuro
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          const isDark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem('peruexpress-theme', isDark ? 'dark' : 'light');
+          if (window.lucide) window.lucide.createIcons();
+        });
+      }
+
+      // Alternar Tabs: Login vs Registro
+      const tabLogin = document.getElementById('tab-login');
+      const tabRegister = document.getElementById('tab-register');
+      const formLogin = document.getElementById('form-login');
+      const formRegister = document.getElementById('form-register');
+
+      tabLogin.addEventListener('click', () => {
+        tabLogin.classList.add('border-brand-900', 'dark:border-accent-500', 'text-brand-950', 'dark:text-white');
+        tabLogin.classList.remove('border-transparent', 'text-slate-500', 'dark:text-slate-400');
+        tabRegister.classList.remove('border-brand-900', 'dark:border-accent-500', 'text-brand-950', 'dark:text-white');
+        tabRegister.classList.add('border-transparent', 'text-slate-500', 'dark:text-slate-400');
+
+        formLogin.classList.remove('hidden');
+        formRegister.classList.add('hidden');
+      });
+
+      tabRegister.addEventListener('click', () => {
+        tabRegister.classList.add('border-brand-900', 'dark:border-accent-500', 'text-brand-950', 'dark:text-white');
+        tabRegister.classList.remove('border-transparent', 'text-slate-500', 'dark:text-slate-400');
+        tabLogin.classList.remove('border-brand-900', 'dark:border-accent-500', 'text-brand-950', 'dark:text-white');
+        tabLogin.classList.add('border-transparent', 'text-slate-500', 'dark:text-slate-400');
+
+        formRegister.classList.remove('hidden');
+        formLogin.classList.add('hidden');
+      });
+
+      // Toggle visibilidad de contraseña
+      const btnTogglePasswords = document.querySelectorAll('.btn-toggle-password');
+      btnTogglePasswords.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const input = btn.previousElementSibling;
+          if (input.type === 'password') {
+            input.type = 'text';
+            btn.innerHTML = '<i data-lucide="eye-off" class="w-4 h-4"></i>';
+          } else {
+            input.type = 'password';
+            btn.innerHTML = '<i data-lucide="eye" class="w-4 h-4"></i>';
+          }
+          if (window.lucide) window.lucide.createIcons();
+        });
+      });
+
+      // Modal de éxito simulado
+      const modal = document.getElementById('auth-success-modal');
+      const modalTitle = document.getElementById('modal-success-title');
+      const modalMsg = document.getElementById('modal-success-message');
+      const btnCloseModal = document.getElementById('btn-close-success-modal');
+
+      if (btnCloseModal && modal) {
+        btnCloseModal.addEventListener('click', () => modal.classList.add('hidden'));
+      }
+
+      // Envío de Formulario Login
+      formLogin.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const user = document.getElementById('login-identifier').value;
+        modalTitle.textContent = '¡Sesión Iniciada con Éxito!';
+        modalMsg.textContent = `Bienvenido de vuelta, ${user}. Tu perfil y boletos asociados han sido cargados.`;
+        modal.classList.remove('hidden');
+      });
+
+      // Envío de Formulario Registro
+      formRegister.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nombres = document.getElementById('reg-nombres').value;
+        const pass = document.getElementById('reg-password').value;
+        const passConfirm = document.getElementById('reg-password-confirm').value;
+
+        if (pass !== passConfirm) {
+          alert('Las contraseñas ingresadas no coinciden. Por favor verifícalas.');
+          return;
+        }
+
+        modalTitle.textContent = '¡Cuenta Creada Exitosamente!';
+        modalMsg.textContent = `Hola ${nombres}, tu cuenta en PeruExpress ha sido activada con éxito. Ya puedes reservar tus pasajes con descuento de bienvenida.`;
+        modal.classList.remove('hidden');
+      });
+
+      // Login Social Simulado
+      const btnGoogle = document.getElementById('btn-google-login');
+      if (btnGoogle) {
+        btnGoogle.addEventListener('click', () => {
+          modalTitle.textContent = '¡Conexión con Google Exitosa!';
+          modalMsg.textContent = 'Has sincronizado tu cuenta de Google con PeruExpress de forma segura.';
+          modal.classList.remove('hidden');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PeruExpress | Transporte Terrestre Interprovincial & Pasajes de Bus</title>
+  
+  <!-- Tailwind CSS CDN con configuración de Modo Oscuro por clase -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#0f2759',
+              950: '#0a1936',
+            },
+            accent: {
+              400: '#fb923c',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Estilos complementarios -->
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-brand-900 selection:text-white transition-colors duration-200">
+
+  <!-- ================= TOP BAR INFORMATIVO ================= -->
+  <header class="bg-brand-950 text-slate-300 text-xs border-b border-brand-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-6">
+        <span class="flex items-center gap-1.5 hover:text-white transition">
+          <i data-lucide="phone-call" class="w-3.5 h-3.5 text-accent-500"></i>
+          Central 24/7: <strong>(01) 500-8800</strong>
+        </span>
+        <span class="hidden md:flex items-center gap-1.5 hover:text-white transition">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-accent-500"></i>
+          Terminales autorizados en 18 departamentos
+        </span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#faq" class="hover:text-white transition">Preguntas Frecuentes</a>
+        <span class="text-slate-600">|</span>
+        <a href="#contacto" class="hover:text-white transition">Libro de Reclamaciones</a>
+        <span class="text-slate-600">|</span>
+        <span class="font-semibold text-white bg-brand-900 px-2 py-0.5 rounded text-[11px]">PEN (S/.)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= NAVBAR PRINCIPAL ================= -->
+  <nav class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-950 via-brand-800 to-accent-600 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+            <i data-lucide="bus" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="text-2xl font-black tracking-tight text-brand-950 dark:text-white leading-none">
+              PERU<span class="text-accent-600">EXPRESS</span>
+            </div>
+            <span class="text-[10px] tracking-widest uppercase font-semibold text-slate-500 dark:text-slate-400">Transporte Interprovincial</span>
+          </div>
+        </a>
+
+        <!-- Enlaces Escritorio -->
+        <div class="hidden lg:flex items-center gap-8 text-sm font-semibold text-slate-700 dark:text-slate-300">
+          <a href="#" class="text-brand-700 dark:text-accent-400 font-bold transition">Inicio</a>
+          <a href="#itinerarios" class="hover:text-brand-700 dark:hover:text-white transition">Rutas y Horarios</a>
+          <a href="#flota" class="hover:text-brand-700 dark:hover:text-white transition">Nuestra Flota</a>
+          <a href="#destinos" class="hover:text-brand-700 dark:hover:text-white transition">Destinos Populares</a>
+          <a href="#faq" class="hover:text-brand-700 dark:hover:text-white transition">Ayuda</a>
+        </div>
+
+        <!-- Acciones Directas & Switch de Modo Oscuro -->
+        <div class="hidden sm:flex items-center gap-3.5 pl-8 border-l border-slate-200 dark:border-slate-800 ml-4">
+          <a href="login.html" class="flex items-center gap-2 px-3.5 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl transition">
+            <i data-lucide="ticket" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i>
+            Mis Boletos
+          </a>
+          <a href="login.html" class="px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white bg-brand-900 hover:bg-brand-800 dark:bg-accent-600 dark:hover:bg-accent-700 rounded-xl shadow-sm transition">
+            Iniciar Sesión / Registro
+          </a>
+
+          <!-- Separador sutil para el switch -->
+          <div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
+
+          <!-- Botón Switch Modo Oscuro al extremo derecho -->
+          <button id="theme-toggle" type="button" aria-label="Cambiar tema oscuro/claro" 
+                  class="relative inline-flex items-center h-7 w-12 rounded-full bg-slate-200 dark:bg-slate-700 p-0.5 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-500 hover:opacity-90">
+            <span class="sr-only">Alternar modo oscuro</span>
+            <span class="w-6 h-6 rounded-full bg-white dark:bg-slate-900 shadow-sm flex items-center justify-center transform transition-transform duration-200 translate-x-0 dark:translate-x-5">
+              <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-500 block dark:hidden"></i>
+              <i data-lucide="moon" class="w-3.5 h-3.5 text-sky-400 hidden dark:block"></i>
+            </span>
+          </button>
+        </div>
+
+        <!-- Botón Móvil Hamburguesa -->
+        <div class="lg:hidden flex items-center gap-3">
+          <!-- Switch Móvil rápido -->
+          <button id="theme-toggle-mobile" type="button" aria-label="Cambiar tema" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+            <i data-lucide="sun" class="w-5 h-5 text-amber-500 block dark:hidden"></i>
+            <i data-lucide="moon" class="w-5 h-5 text-sky-400 hidden dark:block"></i>
+          </button>
+          <button id="btn-mobile-menu" aria-label="Abrir menú" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menú Desplegable Móvil -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 space-y-3">
+      <a href="#" class="block px-3 py-2 rounded-md font-semibold text-brand-900 dark:text-white bg-brand-50 dark:bg-slate-800">Inicio</a>
+      <a href="#itinerarios" class="block px-3 py-2 rounded-md font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800">Rutas y Horarios</a>
+      <a href="#flota" class="block px-3 py-2 rounded-md font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800">Nuestra Flota</a>
+      <a href="#destinos" class="block px-3 py-2 rounded-md font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800">Destinos Populares</a>
+      <a href="#faq" class="block px-3 py-2 rounded-md font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800">Preguntas Frecuentes</a>
+      
+      <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2">
+        <a href="login.html" class="w-full text-center py-2.5 text-xs font-bold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 rounded-lg">
+          Mis Boletos
+        </a>
+        <a href="login.html" class="w-full text-center py-2.5 text-xs font-bold text-white bg-brand-900 dark:bg-accent-600 rounded-lg">
+          Iniciar Sesión / Registrarme
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= HERO SECTION CON BUSCADOR ================= -->
+  <section class="relative bg-gradient-to-b from-brand-950 via-brand-900 to-slate-900 text-white pt-14 pb-28 sm:pb-36 overflow-hidden">
+    <!-- Decoración de fondo -->
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+    <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/10 text-accent-400 border border-white/10 mb-6 backdrop-blur-md">
+        <i data-lucide="shield-check" class="w-4 h-4"></i> Certificación de Calidad y Monitoreo Satelital Sutran 24/7
+      </span>
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight">
+        Conectamos las principales ciudades del Perú con <span class="text-accent-500">máxima seguridad</span>
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        Compra tus pasajes con total garantía corporativa, elección de asiento en tiempo real y asistencia permanente durante tu viaje.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= BUSCADOR FLOTANTE ================= -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 sm:-mt-24 relative z-30">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200/80 dark:border-slate-800 p-5 sm:p-8 transition-colors duration-200">
+      
+      <!-- Selector Solo Ida / Ida y Vuelta -->
+      <div class="flex items-center gap-2 mb-6">
+        <button id="btn-solo-ida" type="button" class="px-5 py-2 text-xs font-bold rounded-lg bg-blue-900 text-white transition shadow-sm">
+          Solo Ida
+        </button>
+        <button id="btn-ida-vuelta" type="button" class="px-5 py-2 text-xs font-bold rounded-lg bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-700 transition">
+          Ida y Vuelta
+        </button>
+      </div>
+
+      <!-- Formulario de Búsqueda -->
+      <form id="form-busqueda" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+        <!-- Origen -->
+        <div>
+          <label for="ciudad-origen" class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5 flex items-center gap-1.5">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-700 dark:text-accent-400"></i> Origen
+          </label>
+          <select id="ciudad-origen" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none transition">
+            <option value="lima" selected>Lima (Gran Terminal)</option>
+            <option value="trujillo">Trujillo (Terrapuerto)</option>
+            <option value="arequipa">Arequipa (Terminal Terrestre)</option>
+            <option value="cusco">Cusco (Terminal Santiago)</option>
+            <option value="chiclayo">Chiclayo</option>
+            <option value="piura">Piura</option>
+            <option value="huancayo">Huancayo</option>
+          </select>
+        </div>
+
+        <!-- Destino -->
+        <div>
+          <label for="ciudad-destino" class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5 flex items-center gap-1.5">
+            <i data-lucide="navigation" class="w-3.5 h-3.5 text-accent-600"></i> Destino
+          </label>
+          <select id="ciudad-destino" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none transition">
+            <option value="trujillo" selected>Trujillo (Terrapuerto)</option>
+            <option value="lima">Lima (Gran Terminal)</option>
+            <option value="arequipa">Arequipa (Terminal Terrestre)</option>
+            <option value="cusco">Cusco (Terminal Santiago)</option>
+            <option value="chiclayo">Chiclayo</option>
+            <option value="piura">Piura</option>
+            <option value="mancora">Máncora</option>
+          </select>
+        </div>
+
+        <!-- Fecha Ida -->
+        <div>
+          <label for="fecha-ida" class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5 flex items-center gap-1.5">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 text-brand-700 dark:text-accent-400"></i> Fecha Ida
+          </label>
+          <input type="date" id="fecha-ida" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none transition">
+        </div>
+
+        <!-- Fecha Retorno -->
+        <div id="contenedor-retorno" class="opacity-40 pointer-events-none transition-all duration-200">
+          <label for="fecha-retorno" class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1.5 flex items-center gap-1.5">
+            <i data-lucide="calendar-check" class="w-3.5 h-3.5 text-slate-500"></i> Retorno
+          </label>
+          <input type="date" id="fecha-retorno" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none transition">
+        </div>
+
+        <!-- Botón de Búsqueda -->
+        <div class="sm:col-span-2 lg:col-span-1">
+          <button type="submit" class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-accent-600 hover:bg-accent-700 text-white font-bold rounded-xl shadow-lg shadow-accent-600/20 transition-all hover:scale-[1.02]">
+            <i data-lucide="search" class="w-4 h-4"></i>
+            Buscar Pasajes
+          </button>
+        </div>
+      </form>
+
+      <!-- Garantías al pie del buscador -->
+      <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 md:grid-cols-4 gap-4 text-xs text-slate-500 dark:text-slate-400">
+        <div class="flex items-center gap-2">
+          <i data-lucide="clock" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i>
+          <span>Salidas 100% puntuales</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="shield" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i>
+          <span>Pago cifrado y seguro</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="armchair" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i>
+          <span>Elección de asiento exacta</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="refresh-cw" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i>
+          <span>Reprogramación online</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECCIÓN DE ITINERARIOS Y RESULTADOS ================= -->
+  <section id="itinerarios" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    
+    <!-- Encabezado de la ruta activa -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-slate-200 dark:border-slate-800 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 text-xs font-bold text-brand-800 dark:text-sky-300 bg-brand-50 dark:bg-slate-800 px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Salidas programadas en vivo
+        </div>
+        <h2 id="label-ruta-actual" class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Lima (Gran Terminal) ➔ Trujillo (Terrapuerto)
+        </h2>
+        <p id="label-fecha-actual" class="text-sm text-slate-500 dark:text-slate-400 mt-1 capitalize font-medium">
+          Selección para hoy • 4 servicios disponibles
+        </p>
+      </div>
+
+      <!-- Filtro por Turno -->
+      <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-semibold">
+        <button type="button" data-turno="todos" class="filter-turno-btn px-3.5 py-2 rounded-lg bg-blue-900 text-white transition">Todos</button>
+        <button type="button" data-turno="manana" class="filter-turno-btn px-3.5 py-2 rounded-lg bg-white dark:bg-slate-900 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800 transition border border-gray-300 dark:border-slate-700">Mañana</button>
+        <button type="button" data-turno="tarde" class="filter-turno-btn px-3.5 py-2 rounded-lg bg-white dark:bg-slate-900 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800 transition border border-gray-300 dark:border-slate-700">Tarde</button>
+        <button type="button" data-turno="noche" class="filter-turno-btn px-3.5 py-2 rounded-lg bg-white dark:bg-slate-900 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800 transition border border-gray-300 dark:border-slate-700">Noche</button>
+      </div>
+    </div>
+
+    <!-- Lista de Buses Disponibles -->
+    <div class="space-y-6">
+
+      <!-- BUS 1: Suite 180 (Mañana) -->
+      <article class="bus-trip-card bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm hover:shadow-md transition-all"
+               data-turno="manana"
+               data-servicio="Suite Presidencial 180°"
+               data-horario="07:30 AM"
+               data-precio="115">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          
+          <!-- Bloque de Horarios -->
+          <div class="flex items-center gap-4 sm:gap-8 flex-1">
+            <div class="text-center">
+              <span class="text-2xl font-black text-slate-900 dark:text-white">07:30 AM</span>
+              <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">Terminal Lima Norte</p>
+            </div>
+
+            <div class="flex-1 flex flex-col items-center">
+              <span class="text-xs text-slate-400 font-medium mb-1">8h 30m de viaje directo</span>
+              <div class="w-full flex items-center">
+                <div class="w-2.5 h-2.5 rounded-full bg-brand-700 dark:bg-accent-500"></div>
+                <div class="flex-1 border-t-2 border-dashed border-slate-300 dark:border-slate-700 mx-1"></div>
+                <i data-lucide="bus" class="w-4 h-4 text-slate-400"></i>
+                <div class="flex-1 border-t-2 border-dashed border-slate-300 dark:border-slate-700 mx-1"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-accent-600"></div>
+              </div>
+              <span class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Vía Carretera Panamericana Norte</span>
+            </div>
+
+            <div class="text-center">
+              <span class="text-2xl font-black text-slate-900 dark:text-white">04:00 PM</span>
+              <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">Terrapuerto Trujillo</p>
+            </div>
+          </div>
+
+          <!-- Servicios & Comodidades -->
+          <div class="w-full lg:w-auto flex flex-col lg:border-l lg:border-slate-200 dark:lg:border-slate-800 lg:pl-8">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-300 uppercase">Suite 180°</span>
+              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Bus Scania Doble Piso</span>
+            </div>
+            
+            <div class="flex items-center gap-3 text-slate-600 dark:text-slate-300 text-xs mt-1">
+              <span title="WiFi a bordo" class="flex items-center gap-1"><i data-lucide="wifi" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> WiFi</span>
+              <span title="Cargador USB" class="flex items-center gap-1"><i data-lucide="zap" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> USB</span>
+              <span title="Pantalla táctil" class="flex items-center gap-1"><i data-lucide="tv" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> Pantalla</span>
+              <span title="Clima regulable" class="flex items-center gap-1"><i data-lucide="snowflake" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> A/C</span>
+            </div>
+          </div>
+
+          <!-- Tarifa y Botón de Asientos -->
+          <div class="w-full lg:w-56 flex lg:flex-col items-center lg:items-end justify-between pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-100 dark:border-slate-800">
+            <div class="text-left lg:text-right">
+              <span class="text-xs text-slate-400 block font-medium">Precio por pasajero</span>
+              <div class="text-3xl font-black text-brand-950 dark:text-white">S/ 115<span class="text-sm font-bold text-slate-500">.00</span></div>
+            </div>
+            <button type="button" class="btn-ver-asientos mt-2 px-6 py-2.5 bg-brand-900 hover:bg-brand-800 dark:bg-accent-600 dark:hover:bg-accent-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-sm transition-all flex items-center gap-2">
+              <i data-lucide="armchair" class="w-4 h-4"></i> Ver Asientos
+            </button>
+          </div>
+
+        </div>
+      </article>
+
+      <!-- BUS 2: Imperial 160 (Tarde) -->
+      <article class="bus-trip-card bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm hover:shadow-md transition-all"
+               data-turno="tarde"
+               data-servicio="Imperial Ejecutivo 160°"
+               data-horario="01:30 PM"
+               data-precio="85">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          
+          <div class="flex items-center gap-4 sm:gap-8 flex-1">
+            <div class="text-center">
+              <span class="text-2xl font-black text-slate-900 dark:text-white">01:30 PM</span>
+              <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">Terminal Lima Norte</p>
+            </div>
+
+            <div class="flex-1 flex flex-col items-center">
+              <span class="text-xs text-slate-400 font-medium mb-1">8h 15m directo</span>
+              <div class="w-full flex items-center">
+                <div class="w-2.5 h-2.5 rounded-full bg-brand-700 dark:bg-accent-500"></div>
+                <div class="flex-1 border-t-2 border-dashed border-slate-300 dark:border-slate-700 mx-1"></div>
+                <i data-lucide="bus" class="w-4 h-4 text-slate-400"></i>
+                <div class="flex-1 border-t-2 border-dashed border-slate-300 dark:border-slate-700 mx-1"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-accent-600"></div>
+              </div>
+              <span class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 mt-1">Confort & Películas</span>
+            </div>
+
+            <div class="text-center">
+              <span class="text-2xl font-black text-slate-900 dark:text-white">09:45 PM</span>
+              <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">Terrapuerto Trujillo</p>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-auto flex flex-col lg:border-l lg:border-slate-200 dark:lg:border-slate-800 lg:pl-8">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-blue-100 dark:bg-blue-900/40 text-brand-900 dark:text-sky-300 uppercase">Imperial 160°</span>
+              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Volvo Marcopolo G8</span>
+            </div>
+            
+            <div class="flex items-center gap-3 text-slate-600 dark:text-slate-300 text-xs mt-1">
+              <span title="WiFi" class="flex items-center gap-1"><i data-lucide="wifi" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> WiFi</span>
+              <span title="Cargador USB" class="flex items-center gap-1"><i data-lucide="zap" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> USB</span>
+              <span title="Snack a bordo" class="flex items-center gap-1"><i data-lucide="coffee" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> Snack</span>
+              <span title="A/C" class="flex items-center gap-1"><i data-lucide="snowflake" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> A/C</span>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-56 flex lg:flex-col items-center lg:items-end justify-between pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-100 dark:border-slate-800">
+            <div class="text-left lg:text-right">
+              <span class="text-xs text-slate-400 block font-medium">Precio por pasajero</span>
+              <div class="text-3xl font-black text-brand-950 dark:text-white">S/ 85<span class="text-sm font-bold text-slate-500">.00</span></div>
+            </div>
+            <button type="button" class="btn-ver-asientos mt-2 px-6 py-2.5 bg-brand-900 hover:bg-brand-800 dark:bg-accent-600 dark:hover:bg-accent-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-sm transition-all flex items-center gap-2">
+              <i data-lucide="armchair" class="w-4 h-4"></i> Ver Asientos
+            </button>
+          </div>
+
+        </div>
+      </article>
+
+      <!-- BUS 3: Suite Nocturno (Noche) -->
+      <article class="bus-trip-card bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm hover:shadow-md transition-all"
+               data-turno="noche"
+               data-servicio="Suite Nocturno Cama 180°"
+               data-horario="09:45 PM"
+               data-precio="130">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          
+          <div class="flex items-center gap-4 sm:gap-8 flex-1">
+            <div class="text-center">
+              <span class="text-2xl font-black text-slate-900 dark:text-white">09:45 PM</span>
+              <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">Terminal Lima Norte</p>
+            </div>
+
+            <div class="flex-1 flex flex-col items-center">
+              <span class="text-xs text-slate-400 font-medium mb-1">8h 00m Nocturno</span>
+              <div class="w-full flex items-center">
+                <div class="w-2.5 h-2.5 rounded-full bg-brand-700 dark:bg-accent-500"></div>
+                <div class="flex-1 border-t-2 border-dashed border-slate-300 dark:border-slate-700 mx-1"></div>
+                <i data-lucide="moon" class="w-4 h-4 text-purple-600 dark:text-purple-400"></i>
+                <div class="flex-1 border-t-2 border-dashed border-slate-300 dark:border-slate-700 mx-1"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-accent-600"></div>
+              </div>
+              <span class="text-[11px] font-semibold text-purple-600 dark:text-purple-400 mt-1">Llegada al amanecer (sin paradas)</span>
+            </div>
+
+            <div class="text-center">
+              <span class="text-2xl font-black text-slate-900 dark:text-white">05:45 AM</span>
+              <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">Terrapuerto Trujillo</p>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-auto flex flex-col lg:border-l lg:border-slate-200 dark:lg:border-slate-800 lg:pl-8">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-purple-100 dark:bg-purple-900/40 text-purple-900 dark:text-purple-300 uppercase">Suite Nocturno 180°</span>
+              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Cortinas de privacidad</span>
+            </div>
+            
+            <div class="flex items-center gap-3 text-slate-600 dark:text-slate-300 text-xs mt-1">
+              <span title="Kit descanso" class="flex items-center gap-1"><i data-lucide="sparkles" class="w-4 h-4 text-purple-600 dark:text-purple-400"></i> Almohada</span>
+              <span title="WiFi" class="flex items-center gap-1"><i data-lucide="wifi" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> WiFi</span>
+              <span title="Cargador" class="flex items-center gap-1"><i data-lucide="zap" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> 220V</span>
+              <span title="A/C" class="flex items-center gap-1"><i data-lucide="snowflake" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> Calefacción</span>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-56 flex lg:flex-col items-center lg:items-end justify-between pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-100 dark:border-slate-800">
+            <div class="text-left lg:text-right">
+              <span class="text-xs text-slate-400 block font-medium">Precio por pasajero</span>
+              <div class="text-3xl font-black text-brand-950 dark:text-white">S/ 130<span class="text-sm font-bold text-slate-500">.00</span></div>
+            </div>
+            <button type="button" class="btn-ver-asientos mt-2 px-6 py-2.5 bg-brand-900 hover:bg-brand-800 dark:bg-accent-600 dark:hover:bg-accent-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-sm transition-all flex items-center gap-2">
+              <i data-lucide="armchair" class="w-4 h-4"></i> Ver Asientos
+            </button>
+          </div>
+
+        </div>
+      </article>
+
+      <!-- BUS 4: Económico Confort (Noche) -->
+      <article class="bus-trip-card bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm hover:shadow-md transition-all"
+               data-turno="noche"
+               data-servicio="Económico Confort 140°"
+               data-horario="10:30 PM"
+               data-precio="65">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          
+          <div class="flex items-center gap-4 sm:gap-8 flex-1">
+            <div class="text-center">
+              <span class="text-2xl font-black text-slate-900 dark:text-white">10:30 PM</span>
+              <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">Terminal Lima Norte</p>
+            </div>
+
+            <div class="flex-1 flex flex-col items-center">
+              <span class="text-xs text-slate-400 font-medium mb-1">8h 30m</span>
+              <div class="w-full flex items-center">
+                <div class="w-2.5 h-2.5 rounded-full bg-brand-700 dark:bg-accent-500"></div>
+                <div class="flex-1 border-t-2 border-dashed border-slate-300 dark:border-slate-700 mx-1"></div>
+                <i data-lucide="bus" class="w-4 h-4 text-slate-400"></i>
+                <div class="flex-1 border-t-2 border-dashed border-slate-300 dark:border-slate-700 mx-1"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-accent-600"></div>
+              </div>
+              <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mt-1">Tarifa Estudiantil / Ahorro</span>
+            </div>
+
+            <div class="text-center">
+              <span class="text-2xl font-black text-slate-900 dark:text-white">07:00 AM</span>
+              <p class="text-xs font-semibold text-slate-500 dark:text-slate-400">Terrapuerto Trujillo</p>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-auto flex flex-col lg:border-l lg:border-slate-200 dark:lg:border-slate-800 lg:pl-8">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 uppercase">Económico 140°</span>
+              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Servicio Estándar</span>
+            </div>
+            
+            <div class="flex items-center gap-3 text-slate-600 dark:text-slate-300 text-xs mt-1">
+              <span title="USB" class="flex items-center gap-1"><i data-lucide="zap" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> USB</span>
+              <span title="A/C" class="flex items-center gap-1"><i data-lucide="snowflake" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> A/C</span>
+              <span title="Equipaje" class="flex items-center gap-1"><i data-lucide="luggage" class="w-4 h-4 text-brand-700 dark:text-accent-400"></i> 20kg</span>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-56 flex lg:flex-col items-center lg:items-end justify-between pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-100 dark:border-slate-800">
+            <div class="text-left lg:text-right">
+              <span class="text-xs text-slate-400 block font-medium">Precio por pasajero</span>
+              <div class="text-3xl font-black text-brand-950 dark:text-white">S/ 65<span class="text-sm font-bold text-slate-500">.00</span></div>
+            </div>
+            <button type="button" class="btn-ver-asientos mt-2 px-6 py-2.5 bg-brand-900 hover:bg-brand-800 dark:bg-accent-600 dark:hover:bg-accent-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-sm transition-all flex items-center gap-2">
+              <i data-lucide="armchair" class="w-4 h-4"></i> Ver Asientos
+            </button>
+          </div>
+
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= MODAL INTERACTIVO DE ASIENTOS (2 PISOS) ================= -->
+  <div id="seat-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 max-w-4xl w-full overflow-hidden animate-modal transition-colors duration-200">
+      
+      <!-- Cabecera del Modal -->
+      <div class="bg-brand-950 text-white p-6 flex items-center justify-between border-b border-brand-900">
+        <div>
+          <span id="modal-service-name" class="inline-block px-2.5 py-0.5 rounded bg-accent-600 text-white font-bold text-[11px] uppercase tracking-wider mb-1">
+            Suite Presidencial 180°
+          </span>
+          <h3 class="text-xl font-bold flex items-center gap-2">
+            Selecciona tus Asientos
+            <span class="text-slate-400 text-sm font-normal">• Salida <strong id="modal-bus-time" class="text-white">07:30 AM</strong></span>
+          </h3>
+        </div>
+        <button id="btn-close-modal" aria-label="Cerrar ventana" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Cuerpo del Modal: Distribución en 2 Columnas (Mapa Bus + Resumen) -->
+      <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Columna Izquierda: Mapa del Bus (Pisos 1 y 2) -->
+        <div class="lg:col-span-8">
+          
+          <!-- Selector de Piso -->
+          <div class="flex border-b border-slate-200 dark:border-slate-800 mb-6 text-sm font-bold">
+            <button id="tab-piso-1" type="button" class="flex-1 py-3 text-center border-b-2 border-blue-900 text-blue-900 dark:border-sky-400 dark:text-sky-400 bg-blue-50/50 dark:bg-slate-800 rounded-t-lg transition flex items-center justify-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4"></i> Primer Piso (Suite 180°)
+            </button>
+            <button id="tab-piso-2" type="button" class="flex-1 py-3 text-center border-b-2 border-transparent text-gray-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition flex items-center justify-center gap-2">
+              <i data-lucide="layers" class="w-4 h-4"></i> Segundo Piso (Semi-cama 160°)
+            </button>
+          </div>
+
+          <!-- Leyenda de Asientos -->
+          <div class="flex flex-wrap items-center justify-center gap-6 mb-6 text-xs font-semibold text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="flex items-center gap-2">
+              <div class="w-5 h-5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 shadow-xs"></div>
+              <span>Disponible</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-5 h-5 rounded bg-sky-600 border border-sky-700"></div>
+              <span>Seleccionado</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-5 h-5 rounded bg-slate-300 dark:bg-slate-700 border border-slate-300 dark:border-slate-700"></div>
+              <span>Ocupado</span>
+            </div>
+          </div>
+
+          <!-- Estructura del Bus (Contorno) -->
+          <div class="border-2 border-slate-300 dark:border-slate-700 rounded-3xl p-6 bg-slate-100/50 dark:bg-slate-800/40 max-w-md mx-auto">
+            
+            <!-- Cabina de chofer (Frente) -->
+            <div class="flex items-center justify-between pb-4 mb-6 border-b-2 border-dashed border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 text-xs font-bold">
+              <div class="flex items-center gap-1.5">
+                <i data-lucide="steering-wheel" class="w-4 h-4 text-brand-900 dark:text-accent-400"></i> Frente / Cabina
+              </div>
+              <span class="text-[10px] uppercase tracking-widest bg-slate-200 dark:bg-slate-700 px-2 py-0.5 rounded text-slate-700 dark:text-slate-300">Acceso Entrada</span>
+            </div>
+
+            <!-- PISO 1 (12 asientos VIP 180°) -->
+            <div id="grid-piso-1" class="space-y-4">
+              <!-- Fila 1 -->
+              <div class="flex items-center justify-between">
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="01">01</button>
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="02">02</button>
+                </div>
+                <div class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 tracking-wider uppercase">Pasillo</div>
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-occupied w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="03" disabled>03</button>
+                </div>
+              </div>
+
+              <!-- Fila 2 -->
+              <div class="flex items-center justify-between">
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="04">04</button>
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="05">05</button>
+                </div>
+                <div class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 tracking-wider uppercase">Pasillo</div>
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="06">06</button>
+                </div>
+              </div>
+
+              <!-- Fila 3 -->
+              <div class="flex items-center justify-between">
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-occupied w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="07" disabled>07</button>
+                  <button type="button" class="bus-seat seat-occupied w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="08" disabled>08</button>
+                </div>
+                <div class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 tracking-wider uppercase">Pasillo</div>
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="09">09</button>
+                </div>
+              </div>
+
+              <!-- Fila 4 -->
+              <div class="flex items-center justify-between">
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="10">10</button>
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="11">11</button>
+                </div>
+                <div class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 tracking-wider uppercase">Pasillo</div>
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="12">12</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- PISO 2 (16 asientos Semi-cama 160°) -->
+            <div id="grid-piso-2" class="space-y-4 hidden">
+              <!-- Fila 1 -->
+              <div class="flex items-center justify-between">
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="21">21</button>
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="22">22</button>
+                </div>
+                <div class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 tracking-wider uppercase">Pasillo</div>
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="23">23</button>
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="24">24</button>
+                </div>
+              </div>
+
+              <!-- Fila 2 -->
+              <div class="flex items-center justify-between">
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-occupied w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="25" disabled>25</button>
+                  <button type="button" class="bus-seat seat-occupied w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="26" disabled>26</button>
+                </div>
+                <div class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 tracking-wider uppercase">Pasillo</div>
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="27">27</button>
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="28">28</button>
+                </div>
+              </div>
+
+              <!-- Fila 3 -->
+              <div class="flex items-center justify-between">
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="29">29</button>
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="30">30</button>
+                </div>
+                <div class="text-[10px] font-semibold text-slate-400 dark:text-slate-500 tracking-wider uppercase">Pasillo</div>
+                <div class="flex gap-2">
+                  <button type="button" class="bus-seat seat-available w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="31">31</button>
+                  <button type="button" class="bus-seat seat-occupied w-11 h-11 rounded-lg border font-bold text-xs flex items-center justify-center shadow-xs" data-seat="32" disabled>32</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fondo del Bus (Servicios Higiénicos) -->
+            <div class="flex items-center justify-between pt-4 mt-6 border-t-2 border-dashed border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400 text-xs font-bold">
+              <div class="flex items-center gap-1.5">
+                <i data-lucide="bath" class="w-4 h-4"></i> Baño Químico
+              </div>
+              <span class="text-[10px]">Salida de Emergencia</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Resumen de Compra -->
+        <div class="lg:col-span-4 bg-slate-50 dark:bg-slate-800/80 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+          <div>
+            <h4 class="text-base font-bold text-slate-900 dark:text-white mb-4 pb-2 border-b border-slate-200 dark:border-slate-700">
+              Resumen del Itinerario
+            </h4>
+
+            <div class="space-y-3 text-xs text-slate-600 dark:text-slate-300">
+              <div class="flex justify-between">
+                <span>Tarifa por Asiento:</span>
+                <strong id="modal-base-price" class="text-slate-900 dark:text-white font-bold">S/ 115.00</strong>
+              </div>
+              <div class="flex justify-between">
+                <span>Asientos Seleccionados:</span>
+                <strong id="modal-selected-seats" class="text-brand-700 dark:text-accent-400 font-bold">Ninguno</strong>
+              </div>
+              <div class="flex justify-between">
+                <span>Equipaje de bodega:</span>
+                <strong class="text-emerald-700 dark:text-emerald-400 font-bold">Hasta 20 Kg Incluido</strong>
+              </div>
+              <div class="flex justify-between">
+                <span>Seguro SOAT Interprovincial:</span>
+                <strong class="text-emerald-700 dark:text-emerald-400 font-bold">100% Cobertura</strong>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-slate-200 dark:border-slate-700">
+              <span class="text-xs text-slate-500 dark:text-slate-400 block font-semibold">Total a Pagar:</span>
+              <div id="modal-total-price" class="text-3xl font-black text-brand-950 dark:text-white mt-1">
+                S/ 0.00
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <button id="btn-confirm-booking" type="button" disabled class="w-full py-3.5 px-4 bg-accent-600 text-white font-bold rounded-xl shadow-md transition opacity-50 cursor-not-allowed flex items-center justify-center gap-2">
+              <i data-lucide="check-circle" class="w-4 h-4"></i>
+              Confirmar y Continuar
+            </button>
+            <p class="text-[11px] text-slate-400 text-center mt-2.5">
+              Tus asientos quedan reservados durante 10 minutos para concretar el pago.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= MODAL INTERACTIVO DE PASARELA DE PAGOS ================= -->
+  <div id="payment-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 max-w-4xl w-full overflow-hidden animate-modal transition-colors duration-200">
+      
+      <!-- Encabezado de la pasarela -->
+      <div class="bg-brand-950 text-white p-5 sm:p-6 flex items-center justify-between border-b border-brand-900">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="text-lg sm:text-xl font-black flex items-center gap-2">
+              Pasarela de Pago Seguro
+              <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                SSL 256-Bit
+              </span>
+            </h3>
+            <p class="text-xs text-slate-400">Transacción protegida y cifrada con certificación bancaria</p>
+          </div>
+        </div>
+        <button id="btn-close-payment" aria-label="Cerrar ventana de pago" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Vista 1: Formulario de Pago y Resumen -->
+      <div id="payment-checkout-view" class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Columna Izquierda: Resumen de Boletos y Datos del Pasajero -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Resumen del Viaje -->
+          <div class="bg-slate-50 dark:bg-slate-800/60 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-brand-700 dark:text-accent-400 block mb-2">Detalle de la Reserva</span>
+            <h4 id="pay-summary-route" class="text-base font-bold text-slate-900 dark:text-white">Lima ➔ Trujillo</h4>
+            <p id="pay-summary-date" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">21 de Septiembre, 2026 • 07:30 AM</p>
+            
+            <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+              <div class="flex justify-between text-slate-600 dark:text-slate-300">
+                <span>Servicio:</span>
+                <strong id="pay-summary-service" class="text-slate-900 dark:text-white font-semibold">Suite 180°</strong>
+              </div>
+              <div class="flex justify-between text-slate-600 dark:text-slate-300">
+                <span>Asientos:</span>
+                <strong id="pay-summary-seats" class="text-brand-700 dark:text-accent-400 font-bold">#01, #02</strong>
+              </div>
+              <div class="flex justify-between text-slate-600 dark:text-slate-300">
+                <span>Equipaje incluido:</span>
+                <span class="text-emerald-600 dark:text-emerald-400 font-semibold">20 Kg por pasajero</span>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-700 flex justify-between items-end">
+              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Total a Pagar:</span>
+              <div id="pay-summary-total" class="text-2xl font-black text-brand-950 dark:text-white">
+                S/ 230.00
+              </div>
+            </div>
+          </div>
+
+          <!-- Datos del Pasajero Principal -->
+          <div class="space-y-3">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">Datos del Titular del Pasaje</span>
+            
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Nombres y Apellidos</label>
+              <input type="text" id="pay-buyer-name" required placeholder="Ej. Juan Pérez García" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">DNI / Documento</label>
+                <input type="text" id="pay-buyer-dni" required maxlength="12" placeholder="8 dígitos" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Celular</label>
+                <input type="tel" id="pay-buyer-phone" required placeholder="987 654 321" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Correo para recibir el boleto</label>
+              <input type="email" id="pay-buyer-email" required placeholder="tu@correo.com" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none">
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Columna Derecha: Selección de Métodos de Pago -->
+        <div class="lg:col-span-7">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-3">
+            Selecciona tu Método de Pago
+          </span>
+
+          <!-- Selector de Método (Tabs: Tarjeta, Yape, Plin) -->
+          <div class="grid grid-cols-3 gap-2.5 mb-6">
+            <!-- Opción 1: Tarjetas -->
+            <button type="button" id="pay-method-card" class="pay-method-tab py-3 px-2 rounded-xl border-2 border-brand-900 dark:border-accent-500 bg-blue-50/40 dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-xs flex flex-col items-center gap-1.5 transition">
+              <i data-lucide="credit-card" class="w-5 h-5 text-brand-700 dark:text-accent-400"></i>
+              <span>Tarjeta</span>
+              <span class="text-[10px] text-slate-400 font-normal">Visa / MC</span>
+            </button>
+
+            <!-- Opción 2: Yape -->
+            <button type="button" id="pay-method-yape" class="pay-method-tab py-3 px-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 font-bold text-xs flex flex-col items-center gap-1.5 transition hover:border-purple-500">
+              <div class="w-5 h-5 rounded-full bg-purple-600 text-white flex items-center justify-center text-[10px] font-black">Y</div>
+              <span>Yape</span>
+              <span class="text-[10px] text-purple-600 dark:text-purple-400 font-semibold">BCP</span>
+            </button>
+
+            <!-- Opción 3: Plin -->
+            <button type="button" id="pay-method-plin" class="pay-method-tab py-3 px-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 font-bold text-xs flex flex-col items-center gap-1.5 transition hover:border-cyan-500">
+              <div class="w-5 h-5 rounded-full bg-cyan-500 text-white flex items-center justify-center text-[10px] font-black">P</div>
+              <span>Plin</span>
+              <span class="text-[10px] text-cyan-600 dark:text-cyan-400 font-semibold">BBVA/Inter</span>
+            </button>
+          </div>
+
+          <!-- CONTENIDO: 1. TARJETA -->
+          <div id="pay-panel-card" class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Número de Tarjeta</label>
+              <div class="relative">
+                <input type="text" id="pay-card-number" maxlength="19" placeholder="4557 1234 5678 9010" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-3.5 pr-14 py-2.5 text-xs font-mono font-medium text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none">
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center gap-1.5 pointer-events-none">
+                  <span class="text-[10px] font-black text-blue-600 bg-blue-50 dark:bg-slate-700 px-1 rounded">VISA</span>
+                  <span class="text-[10px] font-black text-orange-500 bg-orange-50 dark:bg-slate-700 px-1 rounded">MC</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Nombre Impreso en la Tarjeta</label>
+              <input type="text" id="pay-card-name" placeholder="Como figura en el plástico" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs font-medium text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Vencimiento</label>
+                <input type="text" id="pay-card-expiry" maxlength="5" placeholder="MM/AA" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs font-mono text-center text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Código CVV</label>
+                <input type="password" id="pay-card-cvv" maxlength="4" placeholder="123" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs font-mono text-center text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-brand-700 focus:outline-none">
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENIDO: 2. YAPE -->
+          <div id="pay-panel-yape" class="space-y-4 hidden">
+            <div class="bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-4">
+              <div class="w-28 h-28 bg-white p-2 rounded-xl border border-purple-200 shadow-sm flex flex-col items-center justify-center shrink-0">
+                <i data-lucide="qr-code" class="w-20 h-20 text-purple-900"></i>
+                <span class="text-[9px] font-black text-purple-700 uppercase mt-0.5">YAPE QR</span>
+              </div>
+              <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 text-center sm:text-left">
+                <strong class="text-sm text-purple-900 dark:text-purple-300 block font-black">Escanea o yapea al número:</strong>
+                <p class="text-lg font-mono font-black text-slate-900 dark:text-white">987 500 880</p>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Titular: PeruExpress Transporte S.A.C.</p>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Código de Aprobación Yape (6 dígitos)</label>
+              <input type="text" id="pay-yape-code" maxlength="6" placeholder="Ej. 748291" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs font-mono font-bold tracking-widest text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-purple-600 focus:outline-none text-center">
+            </div>
+          </div>
+
+          <!-- CONTENIDO: 3. PLIN -->
+          <div id="pay-panel-plin" class="space-y-4 hidden">
+            <div class="bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800/60 rounded-2xl p-4 flex flex-col sm:flex-row items-center gap-4">
+              <div class="w-28 h-28 bg-white p-2 rounded-xl border border-cyan-200 shadow-sm flex flex-col items-center justify-center shrink-0">
+                <i data-lucide="qr-code" class="w-20 h-20 text-cyan-800"></i>
+                <span class="text-[9px] font-black text-cyan-600 uppercase mt-0.5">PLIN QR</span>
+              </div>
+              <div class="text-xs text-slate-600 dark:text-slate-300 space-y-1 text-center sm:text-left">
+                <strong class="text-sm text-cyan-900 dark:text-cyan-300 block font-black">Plinea al número oficial:</strong>
+                <p class="text-lg font-mono font-black text-slate-900 dark:text-white">987 500 880</p>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Acepta BBVA, Scotiabank e Interbank</p>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Código de Confirmación / Operación Plin</label>
+              <input type="text" id="pay-plin-code" maxlength="6" placeholder="Ej. 384019" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs font-mono font-bold tracking-widest text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-cyan-500 focus:outline-none text-center">
+            </div>
+          </div>
+
+          <!-- Botón de Envío de Pago -->
+          <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800">
+            <button id="btn-submit-payment" type="button" class="w-full py-3.5 px-4 bg-accent-600 hover:bg-accent-700 text-white font-bold rounded-xl shadow-lg shadow-accent-600/20 transition-all flex items-center justify-center gap-2">
+              <i data-lucide="lock" class="w-4 h-4"></i>
+              <span id="btn-pay-label">Pagar Ahora S/ 230.00</span>
+            </button>
+            <p class="text-[10px] text-slate-400 text-center mt-2 flex items-center justify-center gap-1">
+              <i data-lucide="shield" class="w-3 h-3 text-emerald-500"></i> No almacenamos datos confidenciales. Transacción monitoreada por Niubiz / Izipay.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Vista 2: Pantalla de Procesando -->
+      <div id="payment-loading-view" class="p-12 text-center hidden">
+        <div class="w-16 h-16 border-4 border-slate-200 dark:border-slate-800 border-t-accent-600 rounded-full animate-spin mx-auto mb-4"></div>
+        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Procesando pago seguro...</h4>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Estamos comunicándonos con la entidad financiera para validar la transacción.</p>
+      </div>
+
+      <!-- Vista 3: Voucher / Boleto Digital Confirmado -->
+      <div id="payment-success-view" class="p-6 sm:p-8 text-center hidden">
+        <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto mb-4 shadow-sm">
+          <i data-lucide="check-circle" class="w-8 h-8"></i>
+        </div>
+        <h4 class="text-2xl font-black text-slate-900 dark:text-white">¡Pago Confirmado y Boleto Emitido!</h4>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Se ha enviado una copia a tu correo y podrás abordar mostrando este boleto digital en tu teléfono.</p>
+
+        <!-- Tarjeta de Voucher Oficial -->
+        <div class="bg-slate-50 dark:bg-slate-800/80 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-6 my-6 max-w-lg mx-auto text-left">
+          <div class="flex justify-between items-center pb-3 border-b border-slate-200 dark:border-slate-700">
+            <div>
+              <span class="text-[10px] uppercase font-bold text-accent-600">Código de Reserva Oficial</span>
+              <h5 id="voucher-code" class="text-lg font-mono font-black text-slate-900 dark:text-white">PE-2026-78421</h5>
+            </div>
+            <div class="w-12 h-12 bg-white p-1 rounded-lg border border-slate-200 flex items-center justify-center">
+              <i data-lucide="qr-code" class="w-10 h-10 text-slate-900"></i>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 py-3 text-xs border-b border-slate-200 dark:border-slate-700">
+            <div>
+              <span class="text-[10px] text-slate-400 block font-semibold">Pasajero</span>
+              <strong id="voucher-passenger" class="text-slate-800 dark:text-slate-100">Juan Pérez García</strong>
+            </div>
+            <div>
+              <span class="text-[10px] text-slate-400 block font-semibold">DNI / Documento</span>
+              <strong id="voucher-dni" class="text-slate-800 dark:text-slate-100 font-mono">72481920</strong>
+            </div>
+            <div>
+              <span class="text-[10px] text-slate-400 block font-semibold">Ruta</span>
+              <strong id="voucher-route" class="text-slate-800 dark:text-slate-100">Lima ➔ Trujillo</strong>
+            </div>
+            <div>
+              <span class="text-[10px] text-slate-400 block font-semibold">Asientos Reservados</span>
+              <strong id="voucher-seats" class="text-brand-700 dark:text-accent-400 font-bold">#01, #02</strong>
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center pt-3 text-xs">
+            <span class="text-slate-500 dark:text-slate-400">Total Pagado:</span>
+            <strong id="voucher-total" class="text-base font-black text-emerald-600 dark:text-emerald-400">S/ 230.00</strong>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
+          <button type="button" id="btn-download-voucher" class="w-full sm:w-auto py-2.5 px-5 bg-brand-900 hover:bg-brand-800 dark:bg-accent-600 dark:hover:bg-accent-700 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-2">
+            <i data-lucide="download" class="w-4 h-4"></i> Descargar Boleto PDF
+          </button>
+          <button type="button" id="btn-finish-voucher" class="w-full sm:w-auto py-2.5 px-5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs rounded-xl transition">
+            Finalizar y Volver
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= DESTINOS POPULARES ================= -->
+  <section id="destinos" class="bg-white dark:bg-slate-950 py-16 sm:py-24 border-t border-slate-200 dark:border-slate-800 transition-colors duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-700 dark:text-accent-400 bg-brand-50 dark:bg-slate-800 px-3 py-1 rounded-full">
+          Rutas Frecuentes
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight mt-3">
+          Destinos más solicitados de nuestra red
+        </h2>
+        <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400 mt-3 leading-relaxed">
+          Flotas modernas saliendo cada hora desde los terminales terrestres más seguros del país.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Destino 1: Trujillo -->
+        <div class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all">
+          <img class="h-64 w-full object-cover group-hover:scale-105 transition-transform duration-500" 
+               src="https://images.unsplash.com/photo-1589802829985-817e51171b92?w=600&auto=format&fit=crop&q=80" 
+               alt="Plaza de Armas Trujillo">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+          <div class="absolute bottom-0 p-5 text-white w-full">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-accent-400">Costa Norte</span>
+            <h3 class="text-xl font-bold">Trujillo</h3>
+            <p class="text-xs text-slate-300 mt-1">Ciudad de la Eterna Primavera</p>
+            <div class="mt-3 flex items-center justify-between border-t border-white/20 pt-2">
+              <span class="text-xs font-medium">Salidas diarias</span>
+              <span class="text-sm font-black text-accent-400">Desde S/ 65.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destino 2: Arequipa -->
+        <div class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all">
+          <img class="h-64 w-full object-cover group-hover:scale-105 transition-transform duration-500" 
+               src="https://images.unsplash.com/photo-1526392060635-9d6019884377?w=600&auto=format&fit=crop&q=80" 
+               alt="Arequipa Misti">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+          <div class="absolute bottom-0 p-5 text-white w-full">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-accent-400">Sierra Sur</span>
+            <h3 class="text-xl font-bold">Arequipa</h3>
+            <p class="text-xs text-slate-300 mt-1">La emblemática Ciudad Blanca</p>
+            <div class="mt-3 flex items-center justify-between border-t border-white/20 pt-2">
+              <span class="text-xs font-medium">Buses Suite 180°</span>
+              <span class="text-sm font-black text-accent-400">Desde S/ 95.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destino 3: Cusco -->
+        <div class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all">
+          <img class="h-64 w-full object-cover group-hover:scale-105 transition-transform duration-500" 
+               src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=600&auto=format&fit=crop&q=80" 
+               alt="Cusco Perú">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+          <div class="absolute bottom-0 p-5 text-white w-full">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-accent-400">Andes Peruanos</span>
+            <h3 class="text-xl font-bold">Cusco</h3>
+            <p class="text-xs text-slate-300 mt-1">Capital Histórica del Imperio Inca</p>
+            <div class="mt-3 flex items-center justify-between border-t border-white/20 pt-2">
+              <span class="text-xs font-medium">Servicio Ejecutivo</span>
+              <span class="text-sm font-black text-accent-400">Desde S/ 120.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destino 4: Máncora -->
+        <div class="group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all">
+          <img class="h-64 w-full object-cover group-hover:scale-105 transition-transform duration-500" 
+               src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop&q=80" 
+               alt="Playas de Máncora">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent"></div>
+          <div class="absolute bottom-0 p-5 text-white w-full">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-accent-400">Playas del Norte</span>
+            <h3 class="text-xl font-bold">Máncora & Órganos</h3>
+            <p class="text-xs text-slate-300 mt-1">Sol radiante todo el año</p>
+            <div class="mt-3 flex items-center justify-between border-t border-white/20 pt-2">
+              <span class="text-xs font-medium">Directo desde Lima</span>
+              <span class="text-sm font-black text-accent-400">Desde S/ 110.00</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FLOTA Y CATEGORÍAS ================= -->
+  <section id="flota" class="bg-slate-50 dark:bg-slate-900/60 py-16 sm:py-24 transition-colors duration-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-700 dark:text-accent-400 bg-brand-100/60 dark:bg-slate-800 px-3 py-1 rounded-full">
+          Confort a Bordo
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight mt-3">
+          Estándares de Servicio de Clase Mundial
+        </h2>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">
+          Unidades Scania y Volvo con tecnología de última generación y carrocerías aerodinámicas.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Tarjeta 1 -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-brand-700 dark:hover:border-accent-500 transition">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-900 dark:text-amber-400 flex items-center justify-center font-bold mb-6">
+            <i data-lucide="crown" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-slate-900 dark:text-white">Suite Presidencial</h3>
+          <p class="text-xs font-bold text-accent-600 dark:text-accent-400 mt-1 uppercase">Reclinación Total 180°</p>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mt-4 leading-relaxed">
+            Asientos anatómicos tipo cama con cortinas de privacidad personal, menú caliente seleccionado y sistema individual de películas.
+          </p>
+          <ul class="mt-6 space-y-2.5 text-xs text-slate-600 dark:text-slate-400 font-medium border-t border-slate-100 dark:border-slate-800 pt-6">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i> Asientos 100% de cuero italiano</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i> Pantalla táctil de 10 pulgadas</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i> Tomacorrientes 220V + USB</li>
+          </ul>
+        </div>
+
+        <!-- Tarjeta 2 -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border-2 border-brand-900 dark:border-accent-500 shadow-md relative">
+          <div class="absolute -top-3.5 right-6 bg-brand-900 dark:bg-accent-600 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+            Más Popular
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-sky-900/40 text-brand-900 dark:text-sky-300 flex items-center justify-center font-bold mb-6">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-slate-900 dark:text-white">Imperial Ejecutivo</h3>
+          <p class="text-xs font-bold text-brand-700 dark:text-sky-400 mt-1 uppercase">Reclinación 160°</p>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mt-4 leading-relaxed">
+            El equilibrio perfecto entre comodidad ejecutiva y economía para viajes intermedios y de larga distancia.
+          </p>
+          <ul class="mt-6 space-y-2.5 text-xs text-slate-600 dark:text-slate-400 font-medium border-t border-slate-100 dark:border-slate-800 pt-6">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i> Apoyapiernas extensible</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i> WiFi Starlink Satelital</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i> Refrigerio ligero a bordo</li>
+          </ul>
+        </div>
+
+        <!-- Tarjeta 3 -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-brand-700 dark:hover:border-accent-500 transition">
+          <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 flex items-center justify-center font-bold mb-6">
+            <i data-lucide="smile" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-xl font-black text-slate-900 dark:text-white">Económico Confort</h3>
+          <p class="text-xs font-bold text-slate-500 dark:text-slate-400 mt-1 uppercase">Reclinación 140°</p>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mt-4 leading-relaxed">
+            Viaja seguro al mejor precio del mercado con los mismos estándares de seguridad vial y puntualidad.
+          </p>
+          <ul class="mt-6 space-y-2.5 text-xs text-slate-600 dark:text-slate-400 font-medium border-t border-slate-100 dark:border-slate-800 pt-6">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i> Aire acondicionado bi-zona</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i> Rastreo GPS en tiempo real</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i> Bodega de 20 kg incluida</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PILARES DE SEGURIDAD CORPORATIVA ================= -->
+  <section class="bg-brand-950 text-white py-16 sm:py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-accent-500">Compromiso Institucional</span>
+          <h2 class="text-3xl sm:text-4xl font-black tracking-tight mt-2 leading-tight">
+            Viaja con la tranquilidad de una empresa formal y regulada
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base mt-4 leading-relaxed">
+            Priorizamos la integridad de cada pasajero. Toda nuestra operación está auditada por el Ministerio de Transportes y Comunicaciones (MTC) y Sutran.
+          </p>
+
+          <div class="mt-8 space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                <i data-lucide="user-check" class="w-5 h-5 text-accent-400"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm">Conductores Profesionales Calificados</h4>
+                <p class="text-xs text-slate-400 mt-1">Relevo estricto cada 4 horas y evaluación médica y biométrica antes de cada salida.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                <i data-lucide="radar" class="w-5 h-5 text-accent-400"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm">Centro de Control de Tráfico 24 Horas</h4>
+                <p class="text-xs text-slate-400 mt-1">Monitoreo de velocidad constante y alerta ante desvíos o incidencias climáticas.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                <i data-lucide="airplay" class="w-5 h-5 text-accent-400"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm">Filtros de Aire HEPA y Desinfección</h4>
+                <p class="text-xs text-slate-400 mt-1">Circulación continua de aire purificado eliminando el 99.9% de partículas y virus.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-md">
+          <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+            <i data-lucide="file-check" class="w-5 h-5 text-emerald-400"></i>
+            Validación de Pasajes por Código QR
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Olvídate de imprimir boletos físicos. Al reservar con PeruExpress, recibes un pasaje digital con código QR oficial que puedes mostrar directamente desde tu celular en la puerta del bus.
+          </p>
+          <div class="mt-6 bg-white/10 rounded-2xl p-4 flex items-center justify-between border border-white/10">
+            <div class="flex items-center gap-3">
+              <i data-lucide="smartphone" class="w-8 h-8 text-accent-400"></i>
+              <div>
+                <span class="text-xs font-bold block">100% Digital y Ecológico</span>
+                <span class="text-[11px] text-slate-400">Válido con DNI o Pasaporte</span>
+              </div>
+            </div>
+            <span class="text-xs font-bold bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full">Sutran Aprobado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PREGUNTAS FRECUENTES (FAQ) ================= -->
+  <section id="faq" class="py-16 sm:py-24 bg-white dark:bg-slate-950 transition-colors duration-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14">
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-700 dark:text-accent-400 bg-brand-50 dark:bg-slate-800 px-3 py-1 rounded-full">
+          Centro de Ayuda
+        </span>
+        <h2 class="text-3xl font-black text-slate-950 dark:text-white tracking-tight mt-3">
+          Preguntas Frecuentes
+        </h2>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">
+          Resolvemos tus dudas antes de iniciar tu próximo viaje.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        
+        <!-- FAQ 1 -->
+        <div class="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden bg-white dark:bg-slate-900">
+          <button type="button" class="faq-toggle-btn w-full p-5 text-left font-bold text-sm text-slate-900 dark:text-slate-100 flex justify-between items-center hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
+            <span>¿Con cuánta anticipación debo presentarme en el terminal?</span>
+            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-slate-400 transition-transform duration-200"></i>
+          </button>
+          <div class="px-5 pb-5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 hidden">
+            Recomendamos llegar con un mínimo de <strong>45 minutos</strong> de anticipación a la hora programada de salida para registrar tu equipaje en bodega y realizar el embarque con tranquilidad.
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden bg-white dark:bg-slate-900">
+          <button type="button" class="faq-toggle-btn w-full p-5 text-left font-bold text-sm text-slate-900 dark:text-slate-100 flex justify-between items-center hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
+            <span>¿Cuál es el límite de equipaje permitido sin costo adicional?</span>
+            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-slate-400 transition-transform duration-200"></i>
+          </button>
+          <div class="px-5 pb-5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 hidden">
+            Cada boleto incluye hasta <strong>20 kilogramos</strong> de equipaje en bodega y un bolso de mano de hasta 5 kg que debe caber en el portaequipajes superior.
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden bg-white dark:bg-slate-900">
+          <button type="button" class="faq-toggle-btn w-full p-5 text-left font-bold text-sm text-slate-900 dark:text-slate-100 flex justify-between items-center hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
+            <span>¿Puedo postergar o cambiar la fecha de mi pasaje?</span>
+            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-slate-400 transition-transform duration-200"></i>
+          </button>
+          <div class="px-5 pb-5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 hidden">
+            Sí, puedes realizar reprogramaciones hasta con <strong>6 horas de anticipación</strong> a la salida del bus a través de nuestra sección "Mis Boletos" o en cualquiera de nuestras ventanillas autorizadas.
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden bg-white dark:bg-slate-900">
+          <button type="button" class="faq-toggle-btn w-full p-5 text-left font-bold text-sm text-slate-900 dark:text-slate-100 flex justify-between items-center hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
+            <span>¿Puedo solicitar Factura Electrónica con RUC?</span>
+            <i data-lucide="chevron-down" class="faq-icon w-4 h-4 text-slate-400 transition-transform duration-200"></i>
+          </button>
+          <div class="px-5 pb-5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 hidden">
+            Por supuesto. Al completar tu compra podrás seleccionar comprobante tipo "Factura", ingresar la Razón Social y el número de RUC de tu empresa para la deducción fiscal correspondiente.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER CORPORATIVO ================= -->
+  <footer id="contacto" class="bg-brand-950 text-slate-300 pt-16 pb-12 border-t border-brand-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-brand-900/80">
+        
+        <!-- Columna 1: Info Empresa -->
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-accent-600 flex items-center justify-center text-white">
+              <i data-lucide="bus" class="w-5 h-5"></i>
+            </div>
+            <span class="text-xl font-black tracking-tight text-white">PERU<span class="text-accent-500">EXPRESS</span></span>
+          </div>
+          <p class="text-xs text-slate-400 mt-4 max-w-sm leading-relaxed">
+            Empresa líder de transporte terrestre interprovincial de pasajeros y encomiendas en el Perú. Más de 20 años uniendo destinos con confort y máxima seguridad.
+          </p>
+          <div class="mt-6 flex items-center gap-3 text-slate-400">
+            <a href="#" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 flex items-center justify-center transition"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+            <a href="#" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 flex items-center justify-center transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+            <a href="#" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 flex items-center justify-center transition"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          </div>
+        </div>
+
+        <!-- Columna 2: Terminales -->
+        <div>
+          <h4 class="text-sm font-bold text-white mb-4">Terminales Principales</h4>
+          <ul class="space-y-2.5 text-xs text-slate-400">
+            <li>Lima: Av. Javier Prado Este 1100</li>
+            <li>Lima Norte: Gran Terminal Plaza Norte</li>
+            <li>Trujillo: Terrapuerto Manuel Seijas</li>
+            <li>Arequipa: Terminal Terrestre Módulo A</li>
+            <li>Cusco: Terminal Terrestre Santiago</li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Servicios -->
+        <div>
+          <h4 class="text-sm font-bold text-white mb-4">Servicios & Flota</h4>
+          <ul class="space-y-2.5 text-xs text-slate-400">
+            <li><a href="#flota" class="hover:text-white transition">Suite Presidencial 180°</a></li>
+            <li><a href="#flota" class="hover:text-white transition">Imperial Ejecutivo 160°</a></li>
+            <li><a href="#flota" class="hover:text-white transition">Económico Confort</a></li>
+            <li><a href="#" class="hover:text-white transition">Transporte Corporativo</a></li>
+            <li><a href="#" class="hover:text-white transition">Envío de Encomiendas</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Libro de Reclamaciones -->
+        <div>
+          <h4 class="text-sm font-bold text-white mb-4">Garantía y Legal</h4>
+          <ul class="space-y-2.5 text-xs text-slate-400 mb-4">
+            <li><a href="#" class="hover:text-white transition">Términos y Condiciones</a></li>
+            <li><a href="#" class="hover:text-white transition">Políticas de Privacidad</a></li>
+            <li><a href="#" class="hover:text-white transition">Derechos del Pasajero</a></li>
+          </ul>
+
+          <a href="#" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 px-3.5 py-2 rounded-xl border border-white/10 text-xs font-semibold text-white transition">
+            <i data-lucide="book-open" class="w-4 h-4 text-accent-400"></i>
+            Libro de Reclamaciones
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Pie final con métodos de pago -->
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <p>© 2026 PeruExpress S.A.C. - RUC 20548912341. Todos los derechos reservados.</p>
+        <div class="flex items-center gap-3 text-slate-400 font-semibold">
+          <span>Métodos de Pago:</span>
+          <span class="px-2 py-0.5 bg-white/5 rounded text-[11px] text-white">VISA</span>
+          <span class="px-2 py-0.5 bg-white/5 rounded text-[11px] text-white">Mastercard</span>
+          <span class="px-2 py-0.5 bg-white/5 rounded text-[11px] text-purple-400">Yape</span>
+          <span class="px-2 py-0.5 bg-white/5 rounded text-[11px] text-cyan-400">Plin</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Script interactivo -->
+  <script src="js/funciones.js"></script>
+</body>
+</html>
